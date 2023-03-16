@@ -59,29 +59,26 @@ class DT:
         return self.total_cost, iteration
     
     def select(self, policy, iteration):
-        match policy:
-            case "random":
-                return random.choice(self.data_sources)
-            case "coupcoll-nodupe":
-                return self.select_coupcoll(dupe=False)
-            case "coupcoll-dupe":
-                return self.select_coupcoll(dupe=True)
-            case "ratiocoll-nodupe":
-                return self.select_ratiocoll(dupe=False)
-            case "ratiocoll-dupe":
-                return self.select_ratiocoll(dupe=True)
-            #case "dualcoll-replace":
-            #    return self.select_dualcoll(replace=True)
-            case "epsilon-exact-nodupe":
-                return self.select_epsilongreedy(iteration, bayes=False, dupe=False)
-            case "epsilon-exact-dupe":
-                return self.select_epsilongreedy(iteration, bayes=False, dupe=True)
-            case "epsilon-bayes-nodupe":
-                return self.select_epsilongreedy(iteration, bayes=True, dupe=False)
-            case "epsilon-bayes-dupe":
-                return self.select_epsilongreedy(iteration, bayes=False, dupe=True)
-            case "ucb":
-                return self.select_ucb(iteration)
+        if policy == "random":
+            return random.choice(self.data_sources)
+        elif policy == "coupcoll-nodupe":
+            return self.select_coupcoll(dupe=False)
+        elif policy == "coupcoll-dupe":
+            return self.select_coupcoll(dupe=True)
+        elif policy == "ratiocoll-nodupe":
+            return self.select_ratiocoll(dupe=False)
+        elif policy == "ratiocoll-dupe":
+            return self.select_ratiocoll(dupe=True)
+        elif policy == "epsilon-exact-nodupe":
+            return self.select_epsilongreedy(iteration, bayes=False, dupe=False)
+        elif policy == "epsilon-exact-dupe":
+            return self.select_epsilongreedy(iteration, bayes=False, dupe=True)
+        elif policy == "epsilon-bayes-nodupe":
+            return self.select_epsilongreedy(iteration, bayes=True, dupe=False)
+        elif policy == "epsilon-bayes-dupe":
+            return self.select_epsilongreedy(iteration, bayes=False, dupe=True)
+        elif policy ==  "ucb":
+            return self.select_ucb(iteration)
     
     def group_score(self, group, prob_method="gt-nodupe", prior_weight=20.0):
         """

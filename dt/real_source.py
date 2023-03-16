@@ -49,21 +49,20 @@ class RealSource:
             prior_weight: the weight that the Dirichlet prior should take (a+b)
         """
         dupes = self.unique_sample_stats[group]
-        match method:
-            case "gt-nodupe":
-                return self.gt_stats.prob(group)
-            case "gt-dupe":
-                return self.gt_stats.prob(group, dupes=dupes)
-            case "sample-nodupe":
-                return self.sample_stats.prob(group)
-            case "sample-dupe":
-                return self.sample_stats.prob(group, dupes=dupes)
-            case "bayes-nodupe":
-                return self.sample_stats.bayes_prob(group, prior_weight)
-            case "bayes-dupe":
-                return self.sample_stats.bayes_prob(group, prior_weight, dupes=dupes)
-            case _: # Default to gt when given invalid method
-                return self.gt_stats.prob(group)
+        if method == "gt-nodupe":
+            return self.gt_stats.prob(group)
+        elif method == "gt-dupe":
+            return self.gt_stats.prob(group, dupes=dupes)
+        elif method == "sample-nodupe":
+            return self.sample_stats.prob(group)
+        elif method == "sample-dupe":
+            return self.sample_stats.prob(group, dupes=dupes)
+        elif method == "bayes-nodupe":
+            return self.sample_stats.bayes_prob(group, prior_weight)
+        elif method == "bayes-dupe":
+            return self.sample_stats.bayes_prob(group, prior_weight, dupes=dupes)
+        else:
+            return self.gt_stats.prob(group)
     
     def count(self, group):
         return self.gt_stats[group]

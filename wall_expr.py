@@ -39,13 +39,14 @@ def zipf_expected_value(s, n):
 # to equal to 1. For the Pareto distribution, mean = 1 when a = 2. 
 # We also ensure that cost is never exactly 0.0
 def assign_costs(n, cost_model):
-    match cost_model:
-        case "uniform":
-            return [1.0] * n
-        case "random":
-            return [ 2 * (1 - random.random()) for i in range(n) ]
-        case "skewed":
-            return [np.random.default_rng().pareto(2, None) for i in range(n)]
+    if cost_model == "uniform":
+        return [1.0] * n
+    elif cost_model == "random":
+        return [ 2 * (1 - random.random()) for i in range(n) ]
+    elif cost_model == "skewed":
+        return [np.random.default_rng().pareto(2, None) for i in range(n)]
+    else: 
+        return [1.0] * n
 
 # Split total value t into n
 def random_split(t, n):

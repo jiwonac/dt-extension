@@ -39,15 +39,14 @@ class SyntheticSource:
                 "bayes": the Bayesian smoothed sample probability
             prior_weight: the weight that the Dirichlet prior should take (a+b)
         """
-        match method:
-            case "gt-nodupe":
-                return self.probs[group]
-            case "sample-nodupe":
-                return self.sample_stats.prob(group)
-            case "bayes-nodupe":
-                return self.sample_stats.bayes_prob(group, prior_weight)
-            case _: # Default to gt when given invalid method
-                return self.probs[group]
+        if method == "gt-nodupe":
+            return self.probs[group]
+        elif method == "sample-nodupe":
+            return self.sample_stats.prob(group)
+        elif method == "bayes-nodupe":
+            return self.sample_stats.bayes_prob(group, prior_weight)
+        else:
+            return self.probs[group]
     
     def sample(self):
         """

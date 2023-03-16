@@ -1,0 +1,4 @@
+random,14858764.0
+coupcoll,10155709.0
+ratiocoll,7034418.0
+epsilon-exact,7074358.0

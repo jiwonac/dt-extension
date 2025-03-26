@@ -1,3 +1,1 @@
-# subgroup-dt
-
-Source code for "Optimizations and Generalizations on Data Tailoring" by Jiwon Chang, Bohan Cui and Fatemeh Nargesian.
+Source code for "Data distribution tailoring revisited: cost-efficient integration of representative data" by Jiwon Chang, Bohan Cui, Fatemeh Nargesian, Abolfazl Asudeh, and H.V. Jagadish.
